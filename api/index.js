@@ -5,23 +5,30 @@ const app = express();
 app.use(express.json());
 var PORT = 3000;
 
+const pgHost = process.env.PG_HOST || "localhost";
+const pgUser = process.env.PG_USER || "postgres";
+const pgPassword = process.env.PG_PASSWORD || "password123";
+const pgDatabase = process.env.PG_DATABASE || "companies";
+
 // create a new PostgreSQL client
-const client = new Client({
-    user: 'postgres',
-    host: '0.0.0.0',
-    database: 'companies',
-    password: 'password123',
-    port: 5432
-});
+let client;
 
 app.use((req, res, next) => {
+    client = new Client({
+        user: pgUser,
+        host: pgHost,
+        database: pgDatabase,
+        password: pgPassword,
+        port: 5432
+    });
+
     client.connect()
         .then(() => next())
         .catch(err => next(err));
 });
 
 // create a new company in the 'company_details' table
-app.post('/companies', (req, res) => {
+app.post('/companies', (req, res, next) => {
     const { name, founded_date, website, industry, revenue, headquarters } = req.body;
     const query = `
         INSERT INTO company_details (name, founded_date, website, industry, revenue, headquarters)
