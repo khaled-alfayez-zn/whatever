@@ -75,7 +75,12 @@ app.put('/companies/:id', (req, res) => {
     const { name, founded_date, website, industry, revenue, headquarters } = req.body;
     const query = `
         UPDATE company_details
-        SET name = $2, founded_date = $3, website = $4, industry = $5, revenue = $6, headquarters = $7
+        SET name = COALESCE( $2, name), 
+            founded_date = COALESCE( $3, founded_date), 
+            website = COALESCE( $4, website), 
+            industry = COALESCE( $5, industry), 
+            revenue = COALESCE( $6, revenue), 
+            headquarters = COALESCE( $7, headquarters)
         WHERE id = $1
         RETURNING *;
         `;
