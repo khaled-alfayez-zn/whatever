@@ -19,3 +19,7 @@ The app should be able to connect to the bd, do CRUD operations on the db, and h
 The app should be able to run in a container, and based on the lanaguge I pick, have an appropriate docker file.
 
 
+## Step Two
+Use multi-stage docker file to tunrun the app. Use volume to store db data.
+
+
