@@ -1,7 +1,7 @@
 # First Project
 ## Using docker run a simple app (db, and backend)
 
-This is the first project to learn how to use Docker. The idea of the app is to have a simple database, running on PostgreSQL with Docker, and have an API that retrieves data from this database, also running on Docker.
+This is the first project for me to learn how to use Docker. The idea of the app is to have a simple database, running on PostgreSQL with Docker, and have an API that retrieves data from this database, also running on Docker.
 The backend could be programmed with whatever language I am most comfortable with.
 
 ## Plan
@@ -23,3 +23,9 @@ The app should be able to run in a container, and based on the lanaguge I pick, 
 Use multi-stage docker file to tunrun the app. Use volume to store db data.
 
 
+## NOT UPDATED
+## STEP ???
+Set up argocd to keep your cluster settings up to date with the repo.
+
+THIS REPO IS PURELY FOR ARGOCD STUFF!!!
+Feeling cute, might delete later. (most likely, I'll forget)
