@@ -1,22 +1,21 @@
-
 CREATE TABLE company_details (
-    id SERIAL PRIMARY KEY, 
-    name TEXT NOT NULL, 
-    founded_date DATE, 
-    website TEXT, 
-    industry TEXT, 
-    revenue NUMERIC(12,2), 
-    headquarters TEXT 
+    id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL,
+    founded_date DATE,
+    website TEXT,
+    industry TEXT,
+    revenue NUMERIC(12,2),
+    headquarters TEXT
 );
 
 
 CREATE TABLE company_employees (
-    id SERIAL PRIMARY KEY, 
-    company_id INTEGER REFERENCES company_details(id) ON DELETE CASCADE, 
-    name TEXT NOT NULL, 
-    title TEXT, 
-    salary NUMERIC(12,2), 
-    hire_date DATE 
+    id SERIAL PRIMARY KEY,
+    company_id INTEGER REFERENCES company_details(id) ON DELETE CASCADE,
+    name TEXT NOT NULL,
+    title TEXT,
+    salary NUMERIC(12,2),
+    hire_date DATE
 );
 
 INSERT INTO company_details (name, founded_date, website, industry, revenue, headquarters) VALUES

@@ -3,7 +3,7 @@ const { Client } = require('pg');
 
 const app = express();
 app.use(express.json());
-var PORT = 3000;
+const PORT = 3000;
 
 const pgHost = process.env.PG_HOST || "localhost";
 const pgUser = process.env.PG_USER || "postgres";
