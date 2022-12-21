@@ -1,0 +1,15 @@
+namespace: test
+namePrefix: test-
+resources:
+- ../../base
+- namespace.yaml
+
+patches:
+- api.yaml
+
+patchesJson6902:
+- target:
+    version: v1
+    kind: Service
+    name: api-service
+  path: api-service.yaml

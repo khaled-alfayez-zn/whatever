@@ -1,0 +1,34 @@
+version: "3"
+
+services:
+  db:
+    build:
+      context: ./db
+      dockerfile: Dockerfile
+    environment:
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: companies
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    # container_name: db-container
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    environment:
+      PG_HOST: db
+      PG_USER: postgres
+      PG_PASSWORD: password123
+      PG_DATABASE: companies
+    ports:
+      - 3000:3000
+    container_name: api-container
+
+volumes:
+  pgdata:
+
+

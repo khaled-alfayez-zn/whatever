@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pg-data
+spec:
+  resources:
+    requests:
+      storage: "256M"
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pg-database
+spec:
+  selector:
+    app: pg-database
+  ports:
+    - port: 5432
+      targetPort: 5432
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pg-database
+spec:
+  selector:
+    matchLabels:
+      app: pg-database
+  template:
+    metadata:
+      labels:
+        app: pg-database
+        by: khaled
+    spec:
+      containers:
+        - name: pg-database
+          image: localhost:5000/firstproject-db
+          imagePullPolicy: Never
+          resources:
+            limits:
+              memory: "1G"
+              cpu: "500m"
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - name: pg-storage
+              mountPath: /var/lib/postgresql/data
+            - name: init-script
+              mountPath: /docker-entrypoint-initdb.d
+      volumes:
+        - name: pg-storage
+          persistentVolumeClaim:
+            claimName: pg-data
+        - name: init-script
+          configMap:
+            name: init-configs

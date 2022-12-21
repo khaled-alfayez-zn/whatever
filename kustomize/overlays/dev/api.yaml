@@ -1,0 +1,15 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-backend
+spec:
+  selector:
+    matchLabels:
+      app: api-backend
+  template:
+    spec:
+      containers:
+      - name: api-container
+        env:
+        - name: PG_HOST
+          value: test-pg-database
